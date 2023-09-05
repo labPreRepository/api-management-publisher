@@ -96,6 +96,10 @@ function (JSONModel, Device, connector) {
                 "ref": `refs/heads/${branchName}`
             };
 
+            const oReviewers = {
+                reviewers: ["BungeBSA/sap-integration-suite"]
+            }
+
             const oMerge = {
                 "body": "Requisicao de implementacao de API",
                 "title": `Proxy: ${sContent.proxy.name}, Provider: ${sContent.provider.name}`,
@@ -140,6 +144,17 @@ function (JSONModel, Device, connector) {
                 },
                 body: JSON.stringify(oMerge)
             });
+
+            const mergeBody = await mergeBranch.json()
+            const setReviwers = await fetch(`https://api.github.com/repos/BungeBSA/sap-api-management-request-json/pulls/${mergeBody.number}/requested_reviewers`, {
+                method:'POST',
+                headers: {
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Authorization': `Bearer ${token} `,
+                    'X-GitHub-Api-Version': '2022-11-28'
+                },
+                body: JSON.stringify(oReviewers)
+            })
 
             if (!response.ok) {
                 throw await response.text();
