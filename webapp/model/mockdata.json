@@ -1,0 +1,62 @@
+[
+    {
+        "provider": "SAP ECC",
+        "pathbackend": "Caminho 1",
+        "nameAPI": "API_name_213",
+        "pathbaseAPI": "/api/apimanagement/api1",
+        "product": "Nome Aplicable",
+        "application": "LabApp",
+        "proxy": "REST",
+        "envioroment": "PROD"
+    },
+    {
+        "provider": "SAP ECC",
+        "pathbackend": "Caminho 2",
+        "nameAPI": "API_name_123",
+        "pathbaseAPI": "/api/apimanagement/api1",
+        "product": "Nome Aplicable",
+        "application": "LabApp",
+        "proxy": "REST",
+        "envioroment": "PROD"
+    },
+    {
+        "provider": "SAP ECC",
+        "pathbackend": "Caminho 3",
+        "nameAPI": "API_name_187",
+        "pathbaseAPI": "/api/apimanagement/api1",
+        "product": "Nome Aplicable",
+        "application": "LabApp",
+        "proxy": "REST",
+        "envioroment": "PROD"
+    },
+    {
+        "provider": "SAP HANA",
+        "pathbackend": "Caminho 1-05",
+        "nameAPI": "API_name_1",
+        "pathbaseAPI": "/api/apimanagement/api1",
+        "product": "Nome Aplicable",
+        "application": "LabApp",
+        "proxy": "SOAP",
+        "envioroment": "PROD"
+    },
+    {
+        "provider": "SAP HANA",
+        "pathbackend": "Caminho 2321",
+        "nameAPI": "API_name_1",
+        "pathbaseAPI": "/api/apimanagement/api1",
+        "product": "Nome Aplicable",
+        "application": "LabApp",
+        "proxy": "SOAP",
+        "envioroment": "PROD"
+    },
+    {
+        "provider": "SAP HANA",
+        "pathbackend": "Caminho 34",
+        "nameAPI": "API_name_1",
+        "pathbaseAPI": "/api/apimanagement/api1",
+        "product": "Nome Aplicable",
+        "application": "LabApp",
+        "proxy": "REST",
+        "envioroment": "PROD"
+    }
+]

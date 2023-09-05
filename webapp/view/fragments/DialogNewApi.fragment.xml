@@ -1,0 +1,112 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form" 
+	confirm="handleConfirm">
+	<Dialog contentWidth="500px" title="Criar Nova API" type="Message" id="dialognewapi">
+		<content>
+			<VBox width="100%">
+				<form:SimpleForm
+					layout="ResponsiveGridLayout"
+					labelSpanS="4"
+					editable="true">
+					<core:Title text="API" />
+					<Label text="Nome" required="true" />
+					<Input id="inputapiname" value="{dialogData>/_apiName}" change="onCheckVersion" />
+					<Label text="Base path" required="true" />
+					<Input id="inputapipath" value="{dialogData>/_apiPath}" change="onCheckVersion" />
+					<Label text="Descrição" />
+					<TextArea id="textareadescription" value="{dialogData>/api/description}" />
+					<Label text="Domínio" required="true" />
+					<Input value="{dialogData>/api/domain}" />
+					<core:Title text="API Real" />
+					<Label text="Nome" required="true" />
+					<Text text="{dialogData>/api/name}" />
+					<Label text="Base path" required="true" />
+					<Text text="{dialogData>/api/path}" />
+					<Label text="Versão" required="true" />
+					<StepInput min="1" value="{dialogData>/_version}" change="onCheckVersion" />
+				</form:SimpleForm>
+
+				<MessageStrip text="Os valores acima refletem o valor real, que precisa ser versionado." />
+
+				<form:SimpleForm
+					layout="ResponsiveGridLayout"
+					labelSpanS="4"
+					editable="true">
+					<core:Title text="Outras informações" />
+					<Label text="Provedor" required="true" />
+					<Select
+						change="copyProviderToProduct"
+						selectedKey="{dialogData>/provider}"
+						forceSelection="false"
+						items="{
+							path: 'productsList>/',
+							sorter: { path: 'title' }
+						}">
+						<core:Item key="{productsList>title}" text="{productsList>title}" />
+					</Select>
+					<Label text="Path do provedor" required="true" />
+					<Input id="inputproviderpath" value="{dialogData>/provider_path}" />
+					<Label text="Produto" required="true" />
+					<Input id="inputproduct" value="{dialogData>/product}" editable="{dialogData>/_isCustomProduct}" />
+					<Label text="" />
+					<CheckBox
+						select="copyProviderToProduct"
+						text="Produto customizado"
+						selected="{dialogData>/_isCustomProduct}"/>
+					<Label text="App" required="true" />
+					<ComboBox
+						value="{dialogData>/application}"
+						items="{
+							path: 'applicationList>/',
+							sorter: { path: 'title' }
+						}">
+						<core:Item key="{applicationList>title}" text="{applicationList>title}" />
+					</ComboBox>
+				</form:SimpleForm>
+
+				<form:SimpleForm
+					layout="ResponsiveGridLayout"
+					labelSpanS="4"
+					editable="true">
+					<Label text="Autenticação" required="false"/>
+					<Select
+						forceSelection="true"
+						selectedKey="{dialogData>/_selectedAuthentication}">
+						<core:Item key="basicAuth" text="Basic Authentication" />
+						<core:Item key="oauth2.0" text="OAuth2" />
+					</Select>
+				</form:SimpleForm>
+
+				<form:SimpleForm
+					layout="ResponsiveGridLayout"
+					labelSpanS="4"
+					editable="true"
+					visible="{= ${dialogData>/_selectedAuthentication} === 'basicAuth' }">
+					<Label text="Usuário" required="true" />
+					<Input value="{dialogData>/authentication/username}" />
+					<Label text="Senha" required="true" />
+					<Input value="{dialogData>/authentication/password}" />
+				</form:SimpleForm>
+
+				<form:SimpleForm
+					layout="ResponsiveGridLayout"
+					labelSpanS="4"
+					editable="true"
+					visible="{= ${dialogData>/_selectedAuthentication} === 'oauth2.0' }">
+					<Label text="Client ID" required="true" />
+					<Input value="{dialogData>/authentication/clientid}" />
+					<Label text="Client Secret" required="true" />
+					<Input value="{dialogData>/authentication/clientsecret}" />
+					<Label text="Token URL" required="true" />
+					<Input value="{dialogData>/authentication/url}" />
+				</form:SimpleForm>
+			</VBox>
+		</content>
+		<buttons>
+            <Button text="Cancelar" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="createNewApiDialogClose"/>
+            <Button icon="sap-icon://add" text="Criar API" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="createNewApi"/>
+        </buttons>
+	</Dialog>
+</core:FragmentDefinition>

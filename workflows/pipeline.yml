@@ -1,0 +1,51 @@
+name: pipeline
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Install MTA Builder
+      run: npm i -g mbt
+    - name: Install Dependencies
+      run: npm ci
+    - name: Build Project
+      run: mbt build
+    - name: Upload Artifact
+      uses: actions/upload-artifact@master    
+      with:    
+        name: mta
+        path: ./mta_archives/bungehubapi_0.0.2.mtar
+      
+  deploy:
+     needs: build
+     runs-on: ubuntu-latest
+     steps:
+       - name: Download Artifact
+         uses: actions/download-artifact@master
+         with:
+           name: mta
+           path: ./
+       - name: Deploy to Cloud Foundry
+         uses: guerric-p/cf-cli-action@master
+         with:
+           cf_api: ${{ secrets.CF_API }}
+           cf_username: ${{ secrets.CF_USERNAME }}
+           cf_password: ${{ secrets.CF_PASSWORD }}
+           cf_org: ${{ secrets.CF_ORG }}
+           cf_space: ${{ secrets.CF_SPACE }}
+           command: deploy ./bungehubapi_0.0.2.mtar -f

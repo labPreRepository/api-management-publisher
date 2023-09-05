@@ -1,0 +1,86 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form" 
+	confirm="handleConfirm">
+	<Dialog contentWidth="500px" title="Implementar API" type="Message" id="dialogimplementapi">
+		<content>
+			<VBox width="100%">
+				<MessageStrip text="Você irá implementar a API em PRD com as seguintes informações:" />
+
+				<form:SimpleForm
+					layout="ResponsiveGridLayout"
+					labelSpanS="4"
+					editable="false">
+					<core:Title text="API" />
+					<Label text="Nome" />
+					<Text text="{dialogData>/api/name}" />
+					<Label text="Provedor" />
+					<Text text="{dialogData>/provider}" />
+					<Label text="Produtos" />
+					<Text text="{ path: 'dialogData>/product', formatter: '.formatter.attributeArray' }" />
+					<Label text="Apps" />
+					<Text text="{ path: 'dialogData>/application', formatter: '.formatter.attributeArray' }" />
+				</form:SimpleForm>
+
+				<form:SimpleForm
+					layout="ResponsiveGridLayout"
+					labelSpanS="4"
+					editable="true">
+					<Label text="Autenticação" required="false"/>
+					<Select
+						forceSelection="true"
+						selectedKey="{dialogData>/_selectedAuthentication}">
+						<core:Item key="basicAuth" text="Basic Authentication" />
+						<core:Item key="oauth2.0" text="OAuth2" />
+					</Select>
+				</form:SimpleForm>
+
+				<form:SimpleForm
+					layout="ResponsiveGridLayout"
+					labelSpanS="4"
+					editable="true"
+					visible="{= ${dialogData>/_selectedAuthentication} === 'basicAuth' }">
+					<Label text="Usuário" required="true" />
+					<Input id="inputuserbasic" value="{dialogData>/authentication/username}" />
+					<Label text="Senha" required="true" />
+					<Input id="inputpassbasic" value="{dialogData>/authentication/password}" />
+				</form:SimpleForm>
+
+				<form:SimpleForm
+					layout="ResponsiveGridLayout"
+					labelSpanS="4"
+					editable="true"
+					visible="{= ${dialogData>/_selectedAuthentication} === 'oauth2.0' }">
+					<Label text="Client ID" required="true" />
+					<Input id="inputclientidoauth" value="{dialogData>/authentication/clientid}" />
+					<Label text="Client Secret" required="true" />
+					<Input id="inputclientsecretoauth" value="{dialogData>/authentication/clientsecret}" />
+					<Label text="Token URL" required="true" />
+					<Input id="inputtokenoauth" value="{dialogData>/authentication/url}" />
+				</form:SimpleForm>
+			</VBox>
+		</content>
+		<buttons>
+            <Button
+				text="Cancelar"
+				type="Default"
+				iconFirst="true"
+				width="auto"
+				enabled="true"
+				visible="true"
+				iconDensityAware="false"
+				press="implementApiDialogClose" />
+            <Button
+				icon="sap-icon://upload-to-cloud"
+				text="Implementar"
+				type="Success"
+				iconFirst="true"
+				width="auto"
+				enabled="true"
+				visible="true"
+				iconDensityAware="false"
+				press="deployApiToPrd" />
+        </buttons>
+	</Dialog>
+</core:FragmentDefinition>

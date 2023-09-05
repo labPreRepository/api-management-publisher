@@ -1,0 +1,61 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:form="sap.ui.layout.form" 
+	confirm="handleConfirm">
+	<Dialog contentWidth="500px" title="Detalhes da API" type="Message" id="dialogviewapi">
+		<content>
+			<VBox width="100%">
+				<form:SimpleForm
+					layout="ResponsiveGridLayout"
+					labelSpanS="4"
+					editable="false">
+					<Label text="Nome" />
+					<Text text="{data>name}" />
+					<Label text="Base path" />
+					<Text text="{data>base_path}" />
+					<Label text="Provedor" />
+					<Text text="{data>provider_name}" />
+					<Label text="Path do provedor" />
+					<Text text="{data>relativePath}" />
+					<Label text="Tipo" />
+					<Text text="{data>service_code}" />
+					<Label text="Status" />
+					<ObjectStatus
+						text="{data>status}"
+						state="{
+							path: 'data>status',
+							formatter: '.formatter.apiStatus'
+						}" />
+				</form:SimpleForm>
+				<List headerText="Produtos" items="{data>product}" noData="Nenhum produto">
+					<DisplayListItem label="{data>}" />
+				</List>
+				<List headerText="Apps" items="{data>application}" noData="Nenhum app">
+					<DisplayListItem label="{data>}" />
+				</List>
+			</VBox>
+		</content>
+		<buttons>
+            <Button
+				text="Fechar"
+				type="Default"
+				iconFirst="true"
+				width="auto"
+				enabled="true"
+				visible="true"
+				iconDensityAware="false"
+				press="viewApiDialogClose" />
+            <Button
+				icon="sap-icon://upload-to-cloud"
+				text="Implementar em PRD"
+				type="Accept"
+				iconFirst="true"
+				width="auto"
+				enabled="true"
+				visible="{= ${config>/model_name} !== 'apiProdManagement' }"
+				iconDensityAware="false"
+				press="implementApiDialogOpen"/>
+        </buttons>
+	</Dialog>
+</core:FragmentDefinition>

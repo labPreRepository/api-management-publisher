@@ -1,0 +1,118 @@
+<mvc:View xmlns:core="sap.ui.core" controllerName="bunge.hubapi.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:f="sap.f"
+    xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:tnt="sap.tnt">
+	<f:DynamicPage id="page" showFooter="{= ${config>/model_name} !== 'apiProdManagement' }">
+		<f:dependents>
+            <core:Fragment
+                fragmentName="bunge.hubapi.view.fragments.DialogNewApi"
+                type="XML" />
+			<core:Fragment
+                fragmentName="bunge.hubapi.view.fragments.DialogImplementApi"
+                type="XML" />
+			<core:Fragment
+                fragmentName="bunge.hubapi.view.fragments.DialogViewApi"
+                type="XML" />
+        </f:dependents>
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Bunge API Hub"/>
+				</f:heading>
+				<!--<f:snappedContent>
+					<Label text="This is a subheading"/>
+				</f:snappedContent>
+				<f:snappedTitleOnMobile>
+					<Title text="This is a subheading"/>
+				</f:snappedTitleOnMobile>-->
+				<f:actions>
+					<Label text="Ambiente: " />
+					<SegmentedButton
+						selectedKey="{config>/model_name}"
+						selectionChange="onEnvironmentChange">
+						<items>
+							<SegmentedButtonItem key="apiNonProdManagement" text="Non-PRD" />
+							<SegmentedButtonItem key="apiProdManagement" text="PRD" />
+						</items>
+					</SegmentedButton>
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<HBox class="sapUiSmallMarginBeginEnd">
+					<VBox width="80%" height="100%" alignItems="Start" justifyContent="SpaceBetween">
+						<items>
+							<Title text="Aplicativos" class="textdialog sapUiSmallMarginBegin sapUiSmallMarginTop" />
+							<core:Fragment
+								fragmentName="bunge.hubapi.view.fragments.ChartApplications"
+								type="XML" />
+						</items>
+					</VBox>
+					
+					<VBox width="80%" height="100%" alignItems="Start" justifyContent="SpaceBetween" class="sapUiTinyMarginBeginEnd">
+						<items>
+							<Title text="Provedores" class="textdialog sapUiSmallMarginBegin sapUiSmallMarginTop" />
+							<core:Fragment
+								fragmentName="bunge.hubapi.view.fragments.ChartProviders"
+								type="XML" />
+						</items>
+					</VBox>
+
+					<VBox width="80%" height="100%" alignItems="Start" justifyContent="SpaceBetween">
+						<items>
+							<Title text="Tipos" class="textdialog sapUiSmallMarginBegin sapUiSmallMarginTop sapUiTinyMarginEnd"/>
+							<core:Fragment
+								fragmentName="bunge.hubapi.view.fragments.ChartProxy"
+								type="XML" />
+						</items>
+					</VBox>
+				</HBox>
+
+			</f:DynamicPageHeader>
+		</f:header>
+		<!-- DynamicPage Content -->
+		<f:content>
+			
+			<List id="apiList" items="{data>/}" busy="{= ${data>/}.length ? false : true }" busyIndicatorDelay="0" itemPress="viewApiDialogOpen">
+				<headerToolbar>
+					<Toolbar>
+						<Title text="APIs" />
+						<ToolbarSpacer />
+						<SearchField width="20%" liveChange="seachFieldTable" placeholder="Buscar" />
+					</Toolbar>
+				</headerToolbar>
+				<ObjectListItem
+					title="{data>name}"
+					type="Active"
+					number="{data>service_code}">
+					<firstStatus>
+						<ObjectStatus
+							inverted="true"
+							text="{data>status}"
+							state="{
+								path: 'data>status',
+								formatter: '.formatter.apiStatus'
+							}" />
+					</firstStatus>
+					<ObjectAttribute title="Provedor" text="{data>provider_name}" visible="{= Boolean(${data>provider_name}) }" />
+					<ObjectAttribute title="Produtos" text="{ path: 'data>product', formatter: '.formatter.attributeArray' }" visible="{= Boolean(${data>product}.length) }" />
+					<ObjectAttribute title="Apps" text="{ path: 'data>application', formatter: '.formatter.attributeArray' }" visible="{= Boolean(${data>application}.length) }" />
+				</ObjectListItem>
+			</List>
+
+		</f:content>
+		<!-- DynamicPage Footer -->
+		<f:footer>
+			<OverflowToolbar>
+				<ToolbarSpacer />
+				<Button
+					icon="sap-icon://add"
+					text="Criar Nova API"
+					type="Emphasized"
+					press="createNewApiDialogOpen" />
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

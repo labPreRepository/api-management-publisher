@@ -1,0 +1,10 @@
+<microchart:InteractiveDonutChart xmlns:microchart="sap.suite.ui.microchart"
+    segments="{chartApplications>/}"
+    displayedSegments="5">
+    <microchart:segments>
+        <microchart:InteractiveDonutChartSegment
+            label="{chartApplications>name}"
+            value="{chartApplications>count}"
+            displayedValue="{chartApplications>percent}" />
+    </microchart:segments>
+</microchart:InteractiveDonutChart>
