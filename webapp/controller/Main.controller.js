@@ -499,7 +499,7 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
         },
 
         sendToGitHub: async function (oData, token) {
-            const sPath = "src/Shared/payloads/newAPI.json";
+            const sPath = "newAPI.json";
             const oView = this.getView();
             token = oView.getModel("token").getData()
             const oFile = await models.getFile(sPath, token);
