@@ -97,7 +97,7 @@ function (JSONModel, Device, connector) {
             };
 
             const oReviewers = {
-                reviewers: ["BungeBSA/sap-integration-suite"]
+                team_reviewers: ["sap-integration-suite"]
             }
 
             const oMerge = {
