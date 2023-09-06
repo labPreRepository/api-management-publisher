@@ -11,14 +11,16 @@
 					labelSpanS="4"
 					editable="true">
 					<core:Title text="API" />
-					<Label text="Nome" required="true" />
-					<Input id="inputapiname" value="{dialogData>/_apiName}" change="onCheckVersion" />
+					<Label text="Titulo" required="true" />
+					<Input id="inputapititle" value="{dialogData>/_apiTitle}" change="onCheckVersion" placeholder="exemplo-api-2"/>
+					<Label text="Nome da API" required="true" />
+					<Input id="inputapiname" value="{dialogData>/_apiName}" change="onCheckVersion" placeholder="ExemploNome"/>
 					<Label text="Base path" required="true" />
-					<Input id="inputapipath" value="{dialogData>/_apiPath}" change="onCheckVersion" />
+					<Input id="inputapipath" value="{dialogData>/_apiPath}" change="onCheckVersion" placeholder="app/teste/ver2-1"/>
 					<Label text="Descrição" />
-					<TextArea id="textareadescription" value="{dialogData>/api/description}" />
+					<TextArea id="textareadescription" value="{dialogData>/api/description}" placeholder="Escreva sua descrição aqui"/>
 					<Label text="Domínio" required="true" />
-					<Input value="{dialogData>/api/domain}" />
+					<Input value="{dialogData>/api/domain}" placeholder="exemplo-api-2"/>
 					<core:Title text="API Real" />
 					<Label text="Nome" required="true" />
 					<Text text="{dialogData>/api/name}" />
@@ -47,9 +49,9 @@
 						<core:Item key="{productsList>title}" text="{productsList>title}" />
 					</Select>
 					<Label text="Path do provedor" required="true" />
-					<Input id="inputproviderpath" value="{dialogData>/provider_path}" />
+					<Input id="inputproviderpath" value="{dialogData>/provider_path}" placeholder="/provider/path-2"/>
 					<Label text="Produto" required="true" />
-					<Input id="inputproduct" value="{dialogData>/product}" editable="{dialogData>/_isCustomProduct}" />
+					<Input id="inputproduct" value="{dialogData>/product}" editable="{dialogData>/_isCustomProduct}" placeholder="Produto"/>
 					<Label text="" />
 					<CheckBox
 						select="copyProviderToProduct"
