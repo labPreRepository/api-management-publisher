@@ -21,10 +21,10 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
 
         dialogDataModel: {
             api: {
+                title: "",
                 name: "",
                 path: "",
-                description: "",
-                domain: ""
+                description: ""
             },
             provider: "",
             provider_path: "",
@@ -38,7 +38,6 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
                 url: ""
             },
             
-            _apiTitle: "",
             _apiName: "",
             _apiPath: "",
             _version: 1,
@@ -56,6 +55,7 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             oView.setModel(new JSONModel(u.clone(this.dialogDataModel)), "dialogData");
             oView.setModel(new JSONModel([]), "applicationList");
             oView.setModel(new JSONModel([]), "productsList");
+            oView.setModel(new JSONModel([]), "userInfo")
             oView.setModel(new JSONModel([]), "token");
             oView.setModel(new JSONModel({
                 "model_name": "apiNonProdManagement"
@@ -63,6 +63,7 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
 
             this.getToken();
             this.readData();
+            this.getUser();
             
         },
 
@@ -75,6 +76,17 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
                 oModel.setData(oData.value);
                 oModel.updateBindings();
             });
+        },
+
+        getUser: function(){
+            if (sap.ushell && sap.ushell.Container && sap.ushell.Container.getService("UserInfo")) {
+                const sUserEmail = sap.ushell.Container.getService("UserInfo").getEmail();
+                const oView = this.getView();
+                const oModel = oView.getModel("userInfo");
+                return oModel.setData(sUserEmail)
+                
+            }
+
         },
 
         readData: function () {
@@ -331,18 +343,12 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             const providerPath = this.byId("inputproviderpath").getValue()
             const product = this.byId("inputproduct").getValue()
 
-            const titleRegex = /^[\a-z0-9-/]+$/
-            const nameRegex = /^[A-Za-z]+$/;
+
+            const nameRegex = /^[A-Za-z0-9]+$/;
             const apiPathRegex = /^[\w-][\w-\/]+$/
             const descriptionRegex = /^[\w ]*$/
             const providerPathRegex = /^[\w-/]+$/
-            const productRegex = /^[A-Za-z]+$/
-
-            if(!titleRegex.test(apiTitle)){
-                const sText = "Preencha o Titulo corretamente. Utilize somente letras minusculas separadas por traço.";
-                MessageToast.show(sText);
-                return false 
-            }
+            const productRegex = /^[A-Za-z-_]+$/
 
             if(!nameRegex.test(apiName)){
                 const sText = "Preencha o Nome corretamente. Utilize somente letras";
@@ -405,14 +411,16 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             const oView = this.getView();
             const oModel = oView.getModel("dialogData");
             const oData = oModel.getData();
+            const oUserEmail = oView.getModel("userInfo").getData();
 
             const oJson = {
                 "route": "/integration",
+                "user": oUserEmail,
                 "proxy": {
+                    "title": oData.api.title,
                     "name": oData.api.name,
                     "path": oData.api.path,
                     "description": oData.api.description,
-                    "domain": oData.api.domain,
                 },
                 "product": {
                     "name": oData.product
