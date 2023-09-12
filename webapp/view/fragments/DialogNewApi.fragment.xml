@@ -13,7 +13,7 @@
 					<core:Title text="API" />
 					<Label text="Titulo" required="false" />
 					<Input id="inputapititle" value="{dialogData>/_apiTitle}" change="onCheckVersion" placeholder="Exemplo Api Northwind"/>
-					<Label text="Nome da API" required="true" />
+					<Label text="Nome do Proxy" required="true" />
 					<Input id="inputapiname" value="{dialogData>/_apiName}" change="onCheckVersion" placeholder="ExemploNome1"/>
 					<Label text="Base path" required="true" />
 					<Input id="inputapipath" value="{dialogData>/_apiPath}" change="onCheckVersion" placeholder="app/teste/ver2-1"/>
