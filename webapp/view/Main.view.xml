@@ -26,7 +26,7 @@
 					<Title text="This is a subheading"/>
 				</f:snappedTitleOnMobile>-->
 				<f:actions>
-					<Label text="Ambiente: " />
+					<Label text="{i18n>environment}" />
 					<SegmentedButton
 						selectedKey="{config>/model_name}"
 						selectionChange="onEnvironmentChange">
@@ -44,7 +44,7 @@
 				<HBox class="sapUiSmallMarginBeginEnd">
 					<VBox width="80%" height="100%" alignItems="Start" justifyContent="SpaceBetween">
 						<items>
-							<Title text="Aplicativos" class="textdialog sapUiSmallMarginBegin sapUiSmallMarginTop" />
+							<Title text="{i18n>apps}" class="textdialog sapUiSmallMarginBegin sapUiSmallMarginTop" />
 							<core:Fragment
 								fragmentName="bunge.hubapi.view.fragments.ChartApplications"
 								type="XML" />
@@ -53,7 +53,7 @@
 					
 					<VBox width="80%" height="100%" alignItems="Start" justifyContent="SpaceBetween" class="sapUiTinyMarginBeginEnd">
 						<items>
-							<Title text="Provedores" class="textdialog sapUiSmallMarginBegin sapUiSmallMarginTop" />
+							<Title text="{i18n>providers}" class="textdialog sapUiSmallMarginBegin sapUiSmallMarginTop" />
 							<core:Fragment
 								fragmentName="bunge.hubapi.view.fragments.ChartProviders"
 								type="XML" />
@@ -62,7 +62,7 @@
 
 					<VBox width="80%" height="100%" alignItems="Start" justifyContent="SpaceBetween">
 						<items>
-							<Title text="Tipos" class="textdialog sapUiSmallMarginBegin sapUiSmallMarginTop sapUiTinyMarginEnd"/>
+							<Title text="{i18n>types}" class="textdialog sapUiSmallMarginBegin sapUiSmallMarginTop sapUiTinyMarginEnd"/>
 							<core:Fragment
 								fragmentName="bunge.hubapi.view.fragments.ChartProxy"
 								type="XML" />
@@ -80,7 +80,7 @@
 					<Toolbar>
 						<Title text="APIs" />
 						<ToolbarSpacer />
-						<SearchField width="20%" liveChange="seachFieldTable" placeholder="Buscar" />
+						<SearchField width="20%" liveChange="seachFieldTable" placeholder="{i18n>search}" />
 					</Toolbar>
 				</headerToolbar>
 				<ObjectListItem
@@ -96,8 +96,8 @@
 								formatter: '.formatter.apiStatus'
 							}" />
 					</firstStatus>
-					<ObjectAttribute title="Provedor" text="{data>provider_name}" visible="{= Boolean(${data>provider_name}) }" />
-					<ObjectAttribute title="Produtos" text="{ path: 'data>product', formatter: '.formatter.attributeArray' }" visible="{= Boolean(${data>product}.length) }" />
+					<ObjectAttribute title="{i18n>provider}" text="{data>provider_name}" visible="{= Boolean(${data>provider_name}) }" />
+					<ObjectAttribute title="{i18n>product}" text="{ path: 'data>product', formatter: '.formatter.attributeArray' }" visible="{= Boolean(${data>product}.length) }" />
 					<ObjectAttribute title="Apps" text="{ path: 'data>application', formatter: '.formatter.attributeArray' }" visible="{= Boolean(${data>application}.length) }" />
 				</ObjectListItem>
 			</List>
@@ -109,7 +109,7 @@
 				<ToolbarSpacer />
 				<Button
 					icon="sap-icon://add"
-					text="Criar Nova API"
+					text="{i18n>createNewApi}"
 					type="Emphasized"
 					press="createNewApiDialogOpen" />
 			</OverflowToolbar>
