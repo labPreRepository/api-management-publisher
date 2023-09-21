@@ -3,24 +3,24 @@
 	xmlns:core="sap.ui.core"
 	xmlns:form="sap.ui.layout.form" 
 	confirm="handleConfirm">
-	<Dialog contentWidth="500px" title="Detalhes da API" type="Message" id="dialogviewapi">
+	<Dialog contentWidth="500px" title="{i18n>apiDetails}" type="Message" id="dialogviewapi">
 		<content>
 			<VBox width="100%">
 				<form:SimpleForm
 					layout="ResponsiveGridLayout"
 					labelSpanS="4"
 					editable="false">
-					<Label text="Nome" />
+					<Label text="{i18n>name}" />
 					<Text text="{data>name}" />
-					<Label text="Base path" />
+					<Label text="{i18n>basepath}" />
 					<Text text="{data>base_path}" />
-					<Label text="Provedor" />
+					<Label text="{i18n>provider}" />
 					<Text text="{data>provider_name}" />
-					<Label text="Path do provedor" />
+					<Label text="{i18n>providerPath}" />
 					<Text text="{data>relativePath}" />
-					<Label text="Tipo" />
+					<Label text="{i18n>type}" />
 					<Text text="{data>service_code}" />
-					<Label text="Status" />
+					<Label text="{i18n>status}" />
 					<ObjectStatus
 						text="{data>status}"
 						state="{
@@ -28,17 +28,17 @@
 							formatter: '.formatter.apiStatus'
 						}" />
 				</form:SimpleForm>
-				<List headerText="Produtos" items="{data>product}" noData="Nenhum produto">
+				<List headerText="{i18n>products}" items="{data>product}" noData="{i18n>noProduct}">
 					<DisplayListItem label="{data>}" />
 				</List>
-				<List headerText="Apps" items="{data>application}" noData="Nenhum app">
+				<List headerText="Apps" items="{data>application}" noData="{i18n>noApps}">
 					<DisplayListItem label="{data>}" />
 				</List>
 			</VBox>
 		</content>
 		<buttons>
             <Button
-				text="Fechar"
+				text="{i18n>close}"
 				type="Default"
 				iconFirst="true"
 				width="auto"
@@ -48,7 +48,7 @@
 				press="viewApiDialogClose" />
             <Button
 				icon="sap-icon://upload-to-cloud"
-				text="Implementar em PRD"
+				text="{i18n>implementInPrd}"
 				type="Accept"
 				iconFirst="true"
 				width="auto"
