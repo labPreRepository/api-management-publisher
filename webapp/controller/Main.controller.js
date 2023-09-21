@@ -511,7 +511,11 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
                 });
             }).finally(() => {
                 oView.setBusy(false);
+                
             });
+            this.implementApiDialogClose()
+            this.viewApiDialogClose()
+            this.createNewApiDialogClose()
         },
 
         sendToGitHub: async function (oData, token) {
