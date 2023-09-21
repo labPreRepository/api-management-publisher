@@ -3,21 +3,21 @@
 	xmlns:core="sap.ui.core"
 	xmlns:form="sap.ui.layout.form" 
 	confirm="handleConfirm">
-	<Dialog contentWidth="500px" title="Implementar API" type="Message" id="dialogimplementapi">
+	<Dialog contentWidth="500px" title="{i18n>implementApi}" type="Message" id="dialogimplementapi">
 		<content>
 			<VBox width="100%">
-				<MessageStrip text="Você irá implementar a API em PRD com as seguintes informações:" />
+				<MessageStrip text="{i18n>implementApiMessage}" />
 
 				<form:SimpleForm
 					layout="ResponsiveGridLayout"
 					labelSpanS="4"
 					editable="false">
 					<core:Title text="API" />
-					<Label text="Nome" />
+					<Label text="{18n>name}" />
 					<Text text="{dialogData>/api/name}" />
-					<Label text="Provedor" />
+					<Label text="{i18n>provider}" />
 					<Text text="{dialogData>/provider}" />
-					<Label text="Produtos" />
+					<Label text="{i18n>products}" />
 					<Text text="{ path: 'dialogData>/product', formatter: '.formatter.attributeArray' }" />
 					<Label text="Apps" />
 					<Text text="{ path: 'dialogData>/application', formatter: '.formatter.attributeArray' }" />
@@ -27,7 +27,7 @@
 					layout="ResponsiveGridLayout"
 					labelSpanS="4"
 					editable="true">
-					<Label text="Autenticação" required="false"/>
+					<Label text="{i18n>auth}" required="false"/>
 					<Select
 						forceSelection="true"
 						selectedKey="{dialogData>/_selectedAuthentication}">
@@ -41,9 +41,9 @@
 					labelSpanS="4"
 					editable="true"
 					visible="{= ${dialogData>/_selectedAuthentication} === 'basicAuth' }">
-					<Label text="Usuário" required="true" />
+					<Label text="{i18n>user}" required="true" />
 					<Input id="inputuserbasic" value="{dialogData>/authentication/username}" />
-					<Label text="Senha" required="true" />
+					<Label text="{i18n>password}" required="true" />
 					<Input id="inputpassbasic" value="{dialogData>/authentication/password}" />
 				</form:SimpleForm>
 
@@ -63,7 +63,7 @@
 		</content>
 		<buttons>
             <Button
-				text="Cancelar"
+				text="{i18n>cancel}"
 				type="Default"
 				iconFirst="true"
 				width="auto"
@@ -73,7 +73,7 @@
 				press="implementApiDialogClose" />
             <Button
 				icon="sap-icon://upload-to-cloud"
-				text="Implementar"
+				text="{i18n>implement}"
 				type="Success"
 				iconFirst="true"
 				width="auto"
