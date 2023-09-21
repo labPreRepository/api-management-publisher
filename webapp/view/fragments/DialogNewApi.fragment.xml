@@ -3,7 +3,7 @@
 	xmlns:core="sap.ui.core"
 	xmlns:form="sap.ui.layout.form" 
 	confirm="handleConfirm">
-	<Dialog contentWidth="500px" title="Criar Nova API" type="Message" id="dialognewapi">
+	<Dialog contentWidth="500px" title="{i18n>createNewApi}" type="Message" id="dialognewapi">
 		<content>
 			<VBox width="100%">
 				<form:SimpleForm
@@ -11,31 +11,31 @@
 					labelSpanS="4"
 					editable="true">
 					<core:Title text="API" />
-					<Label text="Titulo" required="false" />
-					<Input id="inputapititle" value="{dialogData>/_apiTitle}" change="onCheckVersion" placeholder="Exemplo Api Northwind"/>
-					<Label text="Nome do Proxy" required="true" />
-					<Input id="inputapiname" value="{dialogData>/_apiName}" change="onCheckVersion" placeholder="ExemploNome1"/>
-					<Label text="Base path" required="true" />
-					<Input id="inputapipath" value="{dialogData>/_apiPath}" change="onCheckVersion" placeholder="app/teste/ver2-1"/>
-					<Label text="Descrição" />
+					<Label text="{i18n>title}" required="false" />
+					<Input id="inputapititle" value="{dialogData>/api/title}" change="onCheckVersion" placeholder="Exemplo BSI System"/>
+					<Label text="{i18n>proxyname}" required="true" />
+					<Input id="inputapiname" value="{dialogData>/_apiName}" change="onCheckVersion" placeholder="bsa-system"/>
+					<Label text="{i18n>basepath}" required="true" />
+					<Input id="inputapipath" value="{dialogData>/_apiPath}" change="onCheckVersion" placeholder="app/bsa/ver2-1"/>
+					<Label text="{i18n>description}" />
 					<TextArea id="textareadescription" value="{dialogData>/api/description}" placeholder="Escreva sua descrição aqui"/>
-					<core:Title text="API Real" />
-					<Label text="Nome" required="true" />
+					<core:Title text="{i18n>realApi}" />
+					<Label text="{i18n>name}" required="true" />
 					<Text text="{dialogData>/api/name}" />
-					<Label text="Base path" required="true" />
+					<Label text="{i18n>basepath}" required="true" />
 					<Text text="{dialogData>/api/path}" />
-					<Label text="Versão" required="true" />
+					<Label text="{18n>version}" required="true" />
 					<StepInput min="1" value="{dialogData>/_version}" change="onCheckVersion" />
 				</form:SimpleForm>
 
-				<MessageStrip text="Os valores acima refletem o valor real, que precisa ser versionado." />
+				<MessageStrip text="{i18n>realApiMessage}" />
 
 				<form:SimpleForm
 					layout="ResponsiveGridLayout"
 					labelSpanS="4"
 					editable="true">
-					<core:Title text="Outras informações" />
-					<Label text="Provedor" required="true" />
+					<core:Title text="{i18n>moreInfo}" />
+					<Label text="{i18n>provider}" required="true" />
 					<Select
 						change="copyProviderToProduct"
 						selectedKey="{dialogData>/provider}"
@@ -46,14 +46,14 @@
 						}">
 						<core:Item key="{productsList>title}" text="{productsList>title}" />
 					</Select>
-					<Label text="Path do provedor" required="true" />
+					<Label text="{18n>providerPath}" required="true" />
 					<Input id="inputproviderpath" value="{dialogData>/provider_path}" placeholder="/provider/path-2"/>
-					<Label text="Produto" required="true" />
+					<Label text="{18n>product}" required="true" />
 					<Input id="inputproduct" value="{dialogData>/product}" editable="{dialogData>/_isCustomProduct}" placeholder="Produto"/>
 					<Label text="" />
 					<CheckBox
 						select="copyProviderToProduct"
-						text="Produto customizado"
+						text="{i18n>customProduct}"
 						selected="{dialogData>/_isCustomProduct}"/>
 					<Label text="App" required="true" />
 					<ComboBox
@@ -70,7 +70,7 @@
 					layout="ResponsiveGridLayout"
 					labelSpanS="4"
 					editable="true">
-					<Label text="Autenticação" required="false"/>
+					<Label text="{i18n>auth}" required="false"/>
 					<Select
 						forceSelection="true"
 						selectedKey="{dialogData>/_selectedAuthentication}">
@@ -84,9 +84,9 @@
 					labelSpanS="4"
 					editable="true"
 					visible="{= ${dialogData>/_selectedAuthentication} === 'basicAuth' }">
-					<Label text="Usuário" required="true" />
+					<Label text="{i18n>user}" required="true" />
 					<Input value="{dialogData>/authentication/username}" />
-					<Label text="Senha" required="true" />
+					<Label text="{i18n>password}" required="true" />
 					<Input value="{dialogData>/authentication/password}" />
 				</form:SimpleForm>
 
@@ -105,8 +105,8 @@
 			</VBox>
 		</content>
 		<buttons>
-            <Button text="Cancelar" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="createNewApiDialogClose"/>
-            <Button icon="sap-icon://add" text="Criar API" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="createNewApi"/>
+            <Button text="{i18n>cancel}" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="createNewApiDialogClose"/>
+            <Button icon="sap-icon://add" text="{i18n>createApi}" type="Emphasized" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="createNewApi"/>
         </buttons>
 	</Dialog>
 </core:FragmentDefinition>
