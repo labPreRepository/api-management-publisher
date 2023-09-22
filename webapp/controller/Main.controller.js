@@ -344,34 +344,34 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             const product = this.byId("inputproduct").getValue()
 
 
-            const nameRegex = /^[A-Za-z0-9]+$/;
+            const nameRegex = /^[a-z0-9-]+$/;
             const apiPathRegex = /^[\w-][\w-\/]+$/
             const descriptionRegex = /^[\w ]*$/
             const providerPathRegex = /^[\w-/]+$/
             const productRegex = /^[A-Za-z-_]+$/
 
             if(!nameRegex.test(apiName)){
-                const sText = "Preencha o Nome corretamente. Utilize somente letras";
+                const sText = this.getView().getModel("i18n").getResourceBundle().getText("errorName");
                 MessageToast.show(sText);
                 return false 
             }
             if(!apiPathRegex.test(apiPath)){
-                const sText = "Preencha o Base path corretamente. Utilize somente letras e barras, não inicie com barra.";
+                const sText = this.getView().getModel("i18n").getResourceBundle().getText("errorNamePath");
                 MessageToast.show(sText);
                 return false
             }
             if(!descriptionRegex.test(description)){
-                const sText = "Preencha a descricao corretamente. Utilize somente letras";
+                const sText = this.getView().getModel("i18n").getResourceBundle().getText("errorDescription");
                 MessageToast.show(sText);
                 return false
             }
             if(!providerPathRegex.test(providerPath)){
-                const sText = "Preencha o Path do provedor corretamente. Utilize valores alphanuméricos, barras e traço";
+                const sText = this.getView().getModel("i18n").getResourceBundle().getText("errorPath");
                 MessageToast.show(sText);
                 return false
             }
             if(!productRegex.test(product)){
-                const sText = "Preencha o Produto corretamente. Utilize somente letras";
+                const sText = this.getView().getModel("i18n").getResourceBundle().getText("errorProduct");
                 MessageToast.show(sText);
                 return false
             }  
@@ -457,6 +457,7 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             }).finally(() => {
                 oView.setBusy(false);
             });
+            this.createNewApiDialogClose()
         },
 
         deployApiToPrd: function (oEvent) {
@@ -515,7 +516,7 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             });
             this.implementApiDialogClose()
             this.viewApiDialogClose()
-            this.createNewApiDialogClose()
+
         },
 
         sendToGitHub: async function (oData, token) {
