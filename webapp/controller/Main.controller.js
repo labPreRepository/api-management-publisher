@@ -441,17 +441,17 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             oView.setBusy(true);
             oView.setBusyIndicatorDelay(0);
             this.sendToGitHub(oJson).then(() => {
-                const sText = "Projeto implementado com sucesso!";
+                const sText = this.getView().getModel("i18n").getResourceBundle().getText("successMessage");
 
                 MessageBox.success(sText, {
-                    title: "Criação de API"
+                    title: this.getView().getModel("i18n").getResourceBundle().getText("titlePopup")
                 });
             }).catch(oError => {
-                const sText = "Erro durante a implementação.";
+                const sText = this.getView().getModel("i18n").getResourceBundle().getText("errorMessage");
                 const sDetails = models.handleGenericError(oError);
 
                 MessageBox.error(sText, {
-                    title: "Criação de API",
+                    title: this.getView().getModel("i18n").getResourceBundle().getText("titlePopup"),
                     details: sDetails
                 });
             }).finally(() => {
@@ -463,7 +463,7 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
         deployApiToPrd: function (oEvent) {
             const bValid = this.isFormEmpty();
             if (!bValid) {
-                const sText = "Preencha todos os campos corretamente.";
+                const sText = this.getView().getModel("i18n").getResourceBundle().getText("errorRegex");
                 MessageToast.show(sText);
                 return;
             }
@@ -497,17 +497,17 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             oView.setBusy(true);
             oView.setBusyIndicatorDelay(0);
             this.sendToGitHub(oJson).then(() => {
-                const sText = "Projeto implementado com sucesso!";
+                const sText = this.getView().getModel("i18n").getResourceBundle().getText("successMessage");
 
                 MessageBox.success(sText, {
-                    title: "Implementação em PRD"
+                    title: this.getView().getModel("i18n").getResourceBundle().getText("titlePopup")
                 });
             }).catch(oError => {
-                const sText = "Erro durante a implementação.";
+                const sText = this.getView().getModel("i18n").getResourceBundle().getText("errorMessage");
                 const sDetails = models.handleGenericError(oError);
 
                 MessageBox.error(sText, {
-                    title: "Implementação em PRD",
+                    title: this.getView().getModel("i18n").getResourceBundle().getText("titlePopup"),
                     details: sDetails
                 });
             }).finally(() => {
