@@ -46,9 +46,9 @@
 						}">
 						<core:Item key="{productsList>title}" text="{productsList>title}" />
 					</Select>
-					<Label text="{18n>providerPath}" required="true" />
+					<Label text="{i18n>providerPath}" required="true" />
 					<Input id="inputproviderpath" value="{dialogData>/provider_path}" placeholder="/provider/path-2"/>
-					<Label text="{18n>product}" required="true" />
+					<Label text="{i18n>product}" required="true" />
 					<Input id="inputproduct" value="{dialogData>/product}" editable="{dialogData>/_isCustomProduct}" placeholder="Produto"/>
 					<Label text="" />
 					<CheckBox
