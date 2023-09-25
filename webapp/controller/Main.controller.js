@@ -442,7 +442,7 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             const oJson = {
                 "route": "/integration",
                 "user": oUserEmail,
-                "swagger": yamlArchive,
+                
                 "proxy": {
                     "title": oData.api.title,
                     "name": oData.api.name,
@@ -462,7 +462,8 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
                         "type": oData._selectedAuthentication,
                         "properties": oProperties
                     }
-                }
+                },
+                "swagger": yamlArchive
             };
 
             oView.setBusy(true);
