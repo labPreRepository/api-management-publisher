@@ -2,6 +2,7 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
 	xmlns:form="sap.ui.layout.form" 
+	xmlns:u="sap.ui.unified"
 	confirm="handleConfirm">
 	<Dialog contentWidth="500px" title="{i18n>createNewApi}" type="Message" id="dialognewapi">
 		<content>
@@ -64,6 +65,18 @@
 						}">
 						<core:Item key="{applicationList>title}" text="{applicationList>title}" />
 					</ComboBox>
+				</form:SimpleForm>
+
+				<form:SimpleForm
+					layout="ResponsiveGridLayout"
+					labelSpanS="4"
+					editable="true">
+					<Label text="{i18n>yamlArchive}" required="true"/>
+						<u:FileUploader
+							id="idfileUploader"
+							tooltip="{i18n>yamlTooltip}"
+							change="onChangeFileUploader"
+							/>
 				</form:SimpleForm>
 
 				<form:SimpleForm
