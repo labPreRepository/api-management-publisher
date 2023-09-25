@@ -26,6 +26,8 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
                 path: "",
                 description: ""
             },
+            user: "",
+            yamlarchive: "",
             provider: "",
             provider_path: "",
             product: "",
@@ -57,6 +59,7 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             oView.setModel(new JSONModel([]), "productsList");
             oView.setModel(new JSONModel([]), "userInfo")
             oView.setModel(new JSONModel([]), "token");
+            oView.setModel(new JSONModel([]), "base64archive")
             oView.setModel(new JSONModel({
                 "model_name": "apiNonProdManagement"
             }), "config");
@@ -400,6 +403,28 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             }
         },
 
+        toBase64: async function(currentFile){
+            const oView = this.getView();
+            const oModel = oView.getModel("base64archive");
+            new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(currentFile);
+                reader.onload = () => {
+                    resolve(oModel.setData(reader.result))
+                }
+                reader.onerror = reject;
+            });
+        },
+        
+        onChangeFileUploader : async function(oEvt){
+            
+            var aFiles=oEvt.getParameters().files;
+            var currentFile = aFiles[0];
+            await this.toBase64(currentFile)
+            
+
+        },
+
         createNewApi: function (oEvent) {
             const bValid = this.isFormDialogValid();
             if (!bValid) {
@@ -412,10 +437,12 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             const oModel = oView.getModel("dialogData");
             const oData = oModel.getData();
             const oUserEmail = oView.getModel("userInfo").getData();
+            const yamlArchive = oView.getModel("base64archive").getData();
 
             const oJson = {
                 "route": "/integration",
                 "user": oUserEmail,
+                "yamlarchive": yamlArchive,
                 "proxy": {
                     "title": oData.api.title,
                     "name": oData.api.name,
