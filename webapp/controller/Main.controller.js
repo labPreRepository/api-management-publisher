@@ -27,7 +27,7 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
                 description: ""
             },
             user: "",
-            yamlarchive: "",
+            openAPISpecification: "",
             provider: "",
             provider_path: "",
             product: "",
@@ -442,7 +442,7 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             const oJson = {
                 "route": "/integration",
                 "user": oUserEmail,
-                "yamlarchive": yamlArchive,
+                "openAPISpecification": yamlArchive,
                 "proxy": {
                     "title": oData.api.title,
                     "name": oData.api.name,
