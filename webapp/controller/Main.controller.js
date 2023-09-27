@@ -410,7 +410,17 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
                 const reader = new FileReader();
                 reader.readAsDataURL(currentFile);
                 reader.onload = () => {
-                    resolve(oModel.setData(reader.result))
+                    const splitData = reader.result.split(';');
+                    const type = splitData[0]
+                    const base64 = splitData[1];
+                    const base64Formatted = base64.replace(/^base64,/, '')
+                    const result = {
+                        type: type,
+                        base64: base64Formatted
+                    }
+                    resolve(
+                        oModel.setData(result)
+                        )
                 }
                 reader.onerror = reject;
             });
@@ -421,7 +431,6 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             var aFiles=oEvt.getParameters().files;
             var currentFile = aFiles[0];
             await this.toBase64(currentFile)
-            
 
         },
 
@@ -463,7 +472,8 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
                         "properties": oProperties
                     }
                 },
-                "swagger": yamlArchive
+                "swaggerarchivetype": yamlArchive.type,
+                "swagger": yamlArchive.base64
             };
 
             oView.setBusy(true);
