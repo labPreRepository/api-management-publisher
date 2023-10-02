@@ -350,7 +350,7 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             const nameRegex = /^[a-z0-9-]+$/;
             const apiPathRegex = /^[\w-][\w-\/]+$/
             const descriptionRegex = /^[\w ]*$/
-            const providerPathRegex = /^[\w-/]+$/
+            const providerPathRegex = /^[\w-:./]+$/
             const productRegex = /^[A-Za-z-_]+$/
 
             if(!nameRegex.test(apiName)){
