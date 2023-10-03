@@ -345,6 +345,7 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
             const description = this.byId("textareadescription").getValue()
             const providerPath = this.byId("inputproviderpath").getValue()
             const product = this.byId("inputproduct").getValue()
+            const yamlarchive = this.byId("idfileUploader").getValue()
 
 
             const nameRegex = /^[a-z0-9-]+$/;
@@ -377,7 +378,12 @@ function (Controller, JSONModel, FilterOperator, Filter, MessageBox, MessageToas
                 const sText = this.getView().getModel("i18n").getResourceBundle().getText("errorProduct");
                 MessageToast.show(sText);
                 return false
-            }  
+            }
+            if(yamlarchive === ""){
+                const sText = this.getView().getModel("i18n").getResourceBundle().getText("errorYamlMissing");
+                MessageToast.show(sText);
+                return false
+            }
             return true;
         },
 
